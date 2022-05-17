@@ -65,7 +65,7 @@ router.post('/', checkLogin, async (req, res) => {
         });
         
     } catch (error) {
-        res.status(200).json({
+        res.status(500).json({
             error,
             message: 'server error!'
         });
@@ -135,9 +135,10 @@ router.put('/:id', async (req, res) => {
         const todo =  await Todo.findOneAndUpdate({
             _id: req.params.id
         }, req.body, { new: true} );
+
         res.status(200).json({
-        todo,
-        success: 'updated successfully'
+            todo,
+            success: 'updated successfully'
         });
        } catch (error) {
          res.status(500).send(error);

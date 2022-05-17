@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const todos = require('./routes/todosHandler');
 const user = require('./routes/userHandler');
+const tutorial = require('./routes/tutorialHandler');
+const tag = require('./routes/tagHandler');
 
 //to initialize express app
 const app = express();
@@ -15,8 +17,10 @@ mongoose.connect('mongodb://localhost:27017/todos')
         console.log('successfully connected to database');
     }).catch(err => console.log(err));
 
+app.use('/tutorial', tutorial);
 app.use('/todo', todos);
 app.use('/user', user);
+app.use('/tag', tag);
 
 const errorHandler = (err, req, res, next) => {
     if(res.headersSent){
